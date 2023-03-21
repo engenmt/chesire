@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            async function submitInput() {
+                const jokeInput = document.getElementById('joke-input').value
+                const response = await fetch('/feedback', {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({'joke_input': jokeInput})
+                })
+                const responseJson = await response.json()
+                document.getElementById('joke-response').innerHTML=responseJson.feedback
+            }
+
+        </script>
+    </head>
+    <body>
+        <p id="joke-prompt">{{ joke_prompt }}</p>
+        <input id="joke-input" type="text"></input>
+        <button onclick="submitInput()">Submit</button>
+        <p id="joke-response"></p>
+    </body>
+</html>
